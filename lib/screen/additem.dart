@@ -50,7 +50,7 @@ class _additemState extends State<additem> {
                         const EdgeInsets.only(top: 10, left: 10, right: 10),
                     child: TextField(
                       decoration: InputDecoration(
-                          // hintText: "billing Name",
+
                           labelStyle: TextStyle(color: Colors.grey),
                           labelText: "Item Name",
                           border: OutlineInputBorder(
@@ -65,7 +65,7 @@ class _additemState extends State<additem> {
                         Expanded(
                           child: TextField(
                             decoration: InputDecoration(
-                                // hintText: "billing Name",
+
                                 labelStyle: TextStyle(color: Colors.grey),
                                 labelText: "Quantity",
                                 border: OutlineInputBorder(
@@ -73,7 +73,7 @@ class _additemState extends State<additem> {
                           ),
                         ),
                         SizedBox(width: 10),
-                        // Optional: Add some space between the text fields
+
                         Expanded(
                           child: TextField(
                             decoration: InputDecoration(
@@ -102,7 +102,6 @@ class _additemState extends State<additem> {
                           ),
                         ),
                         SizedBox(width: 10),
-                        // Optional: Add some space between the text fields
                         Expanded(
                           child: TextField(
                             decoration: InputDecoration(
