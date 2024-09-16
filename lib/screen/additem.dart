@@ -15,9 +15,16 @@ class additem extends StatefulWidget {
 }
 
 class _additemState extends State<additem> {
+  TextEditingController itemnamecontroller = TextEditingController();
+  TextEditingController unitycontroller = TextEditingController();
+  TextEditingController quantitycontroller = TextEditingController();
+  TextEditingController ratecontroller = TextEditingController();
+  String selectedValuetax = 'Without Tax';
+  String selectedValueunt = '1';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.pink[50],
       appBar: AppBar(
         leading: BackButton(
           onPressed: () {
@@ -43,6 +50,7 @@ class _additemState extends State<additem> {
         children: [
           SingleChildScrollView(
             child: Container(
+              color: Colors.white,
               child: Column(
                 children: [
                   Padding(
@@ -59,11 +67,11 @@ class _additemState extends State<additem> {
                   ),
                   Padding(
                     padding:
-                        const EdgeInsets.only(top: 10, right: 10, left: 10),
+                        const EdgeInsets.only(top: 20, right: 10, left: 10),
                     child: Row(
                       children: [
                         Expanded(
-                          child: TextField(
+                          child: TextFormField(
                             decoration: InputDecoration(
 
                                 labelStyle: TextStyle(color: Colors.grey),
@@ -75,24 +83,61 @@ class _additemState extends State<additem> {
                         SizedBox(width: 10),
 
                         Expanded(
-                          child: TextField(
-                            decoration: InputDecoration(
-                                // hintText: "billing Name",
-                                labelStyle: TextStyle(color: Colors.grey),
-                                labelText: "Unit",
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(5))),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.grey,width: 1),
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            child: Center(
+                              child: DropdownButton<String>(
+                                hint: Text("Unit"),
+                                value: selectedValueunt,
+                                // Current value
+                                icon: Image(
+                                  image: AssetImage("assets/images/down.png"),
+                                  height: 20,
+                                  width: 20,
+                                ),
+                                // Dropdown icon
+                                iconSize: 24,
+                                isExpanded: true,
+                                // elevation: 16,
+                                style: TextStyle(color: Colors.black),
+                                underline: SizedBox(),
+                                onChanged: (String? newValue) {
+                                  setState(() {
+                                    selectedValueunt = newValue!;
+                                  });
+                                },
+                                items: <String>[
+                                  '1',
+                                  '2',
+                                  '3',
+                                  '4',
+                                  '5',
+                                  '6',
+                                ].map<DropdownMenuItem<String>>((String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(left: 5),
+                                      child: Text(value),
+                                    ), // Display text
+                                  );
+                                }).toList(),
+                              ),
+                            ),
                           ),
                         ),
                       ],
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.only(top: 20,left: 10,right: 10),
                     child: Row(
                       children: [
                         Expanded(
-                          child: TextField(
+                          child: TextFormField(
                             decoration: InputDecoration(
                                 // hintText: "billing Name",
                                 labelStyle: TextStyle(color: Colors.grey),
@@ -103,18 +148,51 @@ class _additemState extends State<additem> {
                         ),
                         SizedBox(width: 10),
                         Expanded(
-                          child: TextField(
-                            decoration: InputDecoration(
-                                // hintText: "billing Name",
-                                labelStyle: TextStyle(color: Colors.grey),
-                                labelText: "Without Tax",
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(5))),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.grey,width: 1),
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            child: Center(
+                              child: DropdownButton<String>(
+                                value: selectedValuetax,
+                                // Current value
+                                icon: Image(
+                                  image: AssetImage("assets/images/down.png"),
+                                  height: 20,
+                                  width: 20,
+                                ),
+                                // Dropdown icon
+                                iconSize: 24,
+                                isExpanded: true,
+                                // elevation: 16,
+                                style: TextStyle(color: Colors.black),
+                                underline: SizedBox(),
+                                onChanged: (String? newValue) {
+                                  setState(() {
+                                    selectedValuetax = newValue!;
+                                  });
+                                },
+                                items: <String>[
+                                  'Without Tax',
+                                  'With Tax',
+                                ].map<DropdownMenuItem<String>>((String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(left: 5),
+                                      child: Text(value),
+                                    ), // Display text
+                                  );
+                                }).toList(),
+                              ),
+                            ),
                           ),
                         ),
                       ],
                     ),
-                  )
+                  ),
+                  SizedBox(height: 20,)
                 ],
               ),
             ),
@@ -128,7 +206,7 @@ class _additemState extends State<additem> {
             Expanded(
               child: ElevatedButton(
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => additem(),));
+
                 },
                 child: Text("Save & New"),
                 style: ElevatedButton.styleFrom(
@@ -144,7 +222,7 @@ class _additemState extends State<additem> {
             Expanded(
               child: ElevatedButton(
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => additem(),));
+
                 },
                 child: Text("Save",style: TextStyle(color: Colors.white),),
                 style: ElevatedButton.styleFrom(
@@ -157,40 +235,6 @@ class _additemState extends State<additem> {
                 ),
               ),
             ),
-            // ElevatedButton(
-            //   onPressed: () {
-            //     Navigator.push(context, MaterialPageRoute(builder: (context) => additem(),));
-            //   },
-            //   child: Row(
-            //     mainAxisAlignment: MainAxisAlignment.center,
-            //     children: [
-            //       Icon(
-            //         CupertinoIcons.plus_circle_fill,
-            //         color: Colors.blue,
-            //       ),
-            //       Text(
-            //         "Add items",
-            //         style: TextStyle(
-            //             color: Colors.blue,
-            //             fontWeight: FontWeight.w500),
-            //       ),
-            //       SizedBox(
-            //         width: 5,
-            //       ),
-            //       Text(
-            //         "(Optional)",
-            //         style: TextStyle(color: Colors.grey),
-            //       )
-            //     ],
-            //   ),
-            //   style: ElevatedButton.styleFrom(
-            //     minimumSize: Size(double.infinity, 55),
-            //     side: BorderSide(width: 1.0, color: Colors.grey),
-            //     shape: RoundedRectangleBorder(
-            //       borderRadius: BorderRadius.circular(5),
-            //     ),
-            //   ),
-            // ),
           ],
         ),
       ),

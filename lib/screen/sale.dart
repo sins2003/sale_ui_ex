@@ -1,10 +1,13 @@
 import 'package:animated_toggle_switch/animated_toggle_switch.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:sale_ui_ex/screen/additem.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MaterialApp(
     home: saleui(),
     debugShowCheckedModeBanner: false,
@@ -18,7 +21,9 @@ class saleui extends StatefulWidget {
 
 class _saleuiState extends State<saleui> {
   TextEditingController datecontroller = TextEditingController();
-  String? valueDPBox;
+  TextEditingController customercontroller = TextEditingController();
+  TextEditingController billingrcontroller = TextEditingController();
+  TextEditingController phonercontroller = TextEditingController();
   String selectedValue = ' ';
   bool firstswitchvalue = false;
   Color switchcolor = Color(0xff06bc7d);
@@ -26,7 +31,7 @@ class _saleuiState extends State<saleui> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.pink[50],
+      backgroundColor: Colors.grey[200],
       appBar: AppBar(
         leading: BackButton(),
         title: Text(
@@ -34,24 +39,30 @@ class _saleuiState extends State<saleui> {
           style: TextStyle(fontSize: 22, fontWeight: FontWeight.w900),
         ),
         actions: [
-          AnimatedToggleSwitch<bool>.size(
-            current: firstswitchvalue,
-            values: [false, true],
-            iconOpacity: 0.2,
-            indicatorSize: Size.fromWidth(50),
-            customIconBuilder: (context, local, global) => Text(
-              local.value ? 'Credit' : 'Cash',
-              style: TextStyle(color: Colors.black),
+          Padding(
+            padding: const EdgeInsets.only(top: 5),
+            child: Container(
+              height: 30,
+              child: AnimatedToggleSwitch<bool>.size(
+                current: firstswitchvalue,
+                values: [false, true],
+                iconOpacity: 0.2,
+                indicatorSize: Size.fromWidth(50),
+                customIconBuilder: (context, local, global) => Text(
+                  local.value ? 'Credit' : 'Cash',
+                  style: TextStyle(color: Colors.black),
+                ),
+                borderWidth: 5,
+                iconAnimationType: AnimationType.onHover,
+                style: ToggleStyle(
+                    indicatorColor: switchcolor,
+                    backgroundColor: Colors.pink[50],
+                    borderColor: Colors.transparent,
+                    borderRadius: BorderRadius.circular(30)),
+                selectedIconScale: 1,
+                onChanged: (value) => setState(() => firstswitchvalue = value),
+              ),
             ),
-            borderWidth: 5,
-            iconAnimationType: AnimationType.onHover,
-            style: ToggleStyle(
-                indicatorColor: switchcolor,
-                backgroundColor: Colors.pink[50],
-                borderColor: Colors.transparent,
-                borderRadius: BorderRadius.circular(30)),
-            selectedIconScale: 1,
-            onChanged: (value) => setState(() => firstswitchvalue = value),
           ),
           SizedBox(
             width: 10,
@@ -206,7 +217,7 @@ class _saleuiState extends State<saleui> {
                 ],
               ),
               Divider(
-                color: Colors.pink[50],
+                color: Colors.grey[200],
                 thickness: 10,
               ),
               Padding(
@@ -217,7 +228,7 @@ class _saleuiState extends State<saleui> {
                       Padding(
                         padding:
                             const EdgeInsets.only(top: 10, left: 10, right: 10),
-                        child: TextField(
+                        child: TextFormField(
                           decoration: InputDecoration(
                               // hintText: "Customer",
                               labelText: "Customer *",
@@ -231,7 +242,7 @@ class _saleuiState extends State<saleui> {
                       ),
                       Padding(
                         padding: const EdgeInsets.only(left: 10, right: 10),
-                        child: TextField(
+                        child: TextFormField(
                           decoration: InputDecoration(
                               // hintText: "billing Name",
                               labelStyle: TextStyle(color: Colors.grey),
@@ -245,7 +256,7 @@ class _saleuiState extends State<saleui> {
                       ),
                       Padding(
                         padding: const EdgeInsets.only(left: 10, right: 10),
-                        child: TextField(
+                        child: TextFormField(
                           decoration: InputDecoration(
                               // hintText: "Phone Number",
                               labelStyle: TextStyle(color: Colors.grey),
@@ -315,11 +326,7 @@ class _saleuiState extends State<saleui> {
             Expanded(
               child: ElevatedButton(
                 onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => additem(),
-                      ));
+
                 },
                 child: Text(
                   "Save & New",
@@ -337,11 +344,7 @@ class _saleuiState extends State<saleui> {
             Expanded(
               child: ElevatedButton(
                 onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => additem(),
-                      ));
+
                 },
                 child: Text(
                   "Save",

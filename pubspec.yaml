@@ -37,6 +37,8 @@ dependencies:
   cupertino_icons: ^1.0.8
   http:
   animated_toggle_switch:
+  cloud_firestore:
+  firebase_core:
 
 dev_dependencies:
   flutter_test:

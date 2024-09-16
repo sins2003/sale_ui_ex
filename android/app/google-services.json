@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "110777167342",
+    "project_id": "saleuiex",
+    "storage_bucket": "saleuiex.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:110777167342:android:e9b2804241a13513e432ff",
+        "android_client_info": {
+          "package_name": "com.example.sale_ui_ex"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD0Bdnz2Y5T0r14GaAuArj88johIinVcOg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
