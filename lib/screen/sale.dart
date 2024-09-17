@@ -3,11 +3,18 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:sale_ui_ex/database/firebasehelper.dart';
 import 'package:sale_ui_ex/screen/additem.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+      options: FirebaseOptions(
+          apiKey: "AIzaSyD0Bdnz2Y5T0r14GaAuArj88johIinVcOg",
+          appId: "1:110777167342:android:e9b2804241a13513e432ff",
+          messagingSenderId: " ",
+          projectId: "saleuiex",
+          storageBucket: "saleuiex.appspot.com"));
   runApp(MaterialApp(
     home: saleui(),
     debugShowCheckedModeBanner: false,
@@ -229,6 +236,7 @@ class _saleuiState extends State<saleui> {
                         padding:
                             const EdgeInsets.only(top: 10, left: 10, right: 10),
                         child: TextFormField(
+                          controller: customercontroller,
                           decoration: InputDecoration(
                               // hintText: "Customer",
                               labelText: "Customer *",
@@ -243,6 +251,7 @@ class _saleuiState extends State<saleui> {
                       Padding(
                         padding: const EdgeInsets.only(left: 10, right: 10),
                         child: TextFormField(
+                          controller: billingrcontroller,
                           decoration: InputDecoration(
                               // hintText: "billing Name",
                               labelStyle: TextStyle(color: Colors.grey),
@@ -257,6 +266,7 @@ class _saleuiState extends State<saleui> {
                       Padding(
                         padding: const EdgeInsets.only(left: 10, right: 10),
                         child: TextFormField(
+                          controller: phonercontroller,
                           decoration: InputDecoration(
                               // hintText: "Phone Number",
                               labelStyle: TextStyle(color: Colors.grey),
@@ -272,6 +282,13 @@ class _saleuiState extends State<saleui> {
                         padding: const EdgeInsets.only(left: 10, right: 10),
                         child: ElevatedButton(
                           onPressed: () {
+                            firebasehelepr().addData(
+                                customercontroller.text,
+                                billingrcontroller.text,
+                                phonercontroller.text,
+                                " ",
+                                " ",
+                                " ");
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -325,9 +342,7 @@ class _saleuiState extends State<saleui> {
           children: [
             Expanded(
               child: ElevatedButton(
-                onPressed: () {
-
-                },
+                onPressed: () {},
                 child: Text(
                   "Save & New",
                   style: TextStyle(color: Colors.black),
@@ -343,9 +358,7 @@ class _saleuiState extends State<saleui> {
             ),
             Expanded(
               child: ElevatedButton(
-                onPressed: () {
-
-                },
+                onPressed: () {},
                 child: Text(
                   "Save",
                   style: TextStyle(color: Colors.white),

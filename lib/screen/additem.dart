@@ -1,13 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:sale_ui_ex/database/firebasehelper.dart';
 import 'package:sale_ui_ex/screen/sale.dart';
-
-void main() {
-  runApp(MaterialApp(
-    home: additem(),
-    debugShowCheckedModeBanner: false,
-  ));
-}
 
 class additem extends StatefulWidget {
   @override
@@ -21,6 +15,7 @@ class _additemState extends State<additem> {
   TextEditingController ratecontroller = TextEditingController();
   String selectedValuetax = 'Without Tax';
   String selectedValueunt = '1';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +23,11 @@ class _additemState extends State<additem> {
       appBar: AppBar(
         leading: BackButton(
           onPressed: () {
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => saleui(),));
+            Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => saleui(),
+                ));
           },
         ),
         actions: [
@@ -38,7 +37,6 @@ class _additemState extends State<additem> {
                 image: AssetImage("assets/images/setting.png"),
                 height: 30,
                 width: 30,
-
               ))
         ],
         title: Text(
@@ -57,10 +55,11 @@ class _additemState extends State<additem> {
                     padding:
                         const EdgeInsets.only(top: 10, left: 10, right: 10),
                     child: TextField(
+                      controller: itemnamecontroller,
                       decoration: InputDecoration(
-
                           labelStyle: TextStyle(color: Colors.grey),
                           labelText: "Item Name",
+                          hintText: "eg. chocolate cake",
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(5))),
                     ),
@@ -72,8 +71,8 @@ class _additemState extends State<additem> {
                       children: [
                         Expanded(
                           child: TextFormField(
+                            controller: quantitycontroller,
                             decoration: InputDecoration(
-
                                 labelStyle: TextStyle(color: Colors.grey),
                                 labelText: "Quantity",
                                 border: OutlineInputBorder(
@@ -81,11 +80,10 @@ class _additemState extends State<additem> {
                           ),
                         ),
                         SizedBox(width: 10),
-
                         Expanded(
                           child: Container(
                             decoration: BoxDecoration(
-                              border: Border.all(color: Colors.grey,width: 1),
+                              border: Border.all(color: Colors.grey, width: 1),
                               borderRadius: BorderRadius.circular(5),
                             ),
                             child: Center(
@@ -133,11 +131,13 @@ class _additemState extends State<additem> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 20,left: 10,right: 10),
+                    padding:
+                        const EdgeInsets.only(top: 20, left: 10, right: 10),
                     child: Row(
                       children: [
                         Expanded(
                           child: TextFormField(
+                            controller: ratecontroller,
                             decoration: InputDecoration(
                                 // hintText: "billing Name",
                                 labelStyle: TextStyle(color: Colors.grey),
@@ -150,7 +150,7 @@ class _additemState extends State<additem> {
                         Expanded(
                           child: Container(
                             decoration: BoxDecoration(
-                              border: Border.all(color: Colors.grey,width: 1),
+                              border: Border.all(color: Colors.grey, width: 1),
                               borderRadius: BorderRadius.circular(5),
                             ),
                             child: Center(
@@ -192,12 +192,13 @@ class _additemState extends State<additem> {
                       ],
                     ),
                   ),
-                  SizedBox(height: 20,)
+                  SizedBox(
+                    height: 20,
+                  )
                 ],
               ),
             ),
           ),
-
         ],
       ),
       bottomNavigationBar: Container(
@@ -205,13 +206,11 @@ class _additemState extends State<additem> {
           children: [
             Expanded(
               child: ElevatedButton(
-                onPressed: () {
-
-                },
+                onPressed: () {},
                 child: Text("Save & New"),
                 style: ElevatedButton.styleFrom(
                   minimumSize: Size(double.infinity, 55),
-                  side: BorderSide(width:0.5, color: Colors.grey),
+                  side: BorderSide(width: 0.5, color: Colors.grey),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(0),
                   ),
@@ -222,9 +221,18 @@ class _additemState extends State<additem> {
             Expanded(
               child: ElevatedButton(
                 onPressed: () {
-
+                  firebasehelepr().addData(
+                      " ",
+                      " ",
+                      " ",
+                      itemnamecontroller.text,
+                      quantitycontroller.text,
+                      ratecontroller.text);
                 },
-                child: Text("Save",style: TextStyle(color: Colors.white),),
+                child: Text(
+                  "Save",
+                  style: TextStyle(color: Colors.white),
+                ),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.red,
                   minimumSize: Size(double.infinity, 55),
