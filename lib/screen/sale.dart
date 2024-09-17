@@ -32,6 +32,7 @@ class _saleuiState extends State<saleui> {
   TextEditingController billingrcontroller = TextEditingController();
   TextEditingController phonercontroller = TextEditingController();
   String selectedValue = ' ';
+  String initialamount = "----------";
   bool firstswitchvalue = false;
   Color switchcolor = Color(0xff06bc7d);
 
@@ -84,257 +85,273 @@ class _saleuiState extends State<saleui> {
         ],
       ),
       body: SingleChildScrollView(
-        child: Container(
-          color: Colors.white,
-          child: Column(
-            children: [
-              Divider(
-                color: Colors.grey,
-                thickness: 0.5,
-              ),
-              IntrinsicHeight(
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Container(
-                        height: 40,
-                        child: Stack(
-                          children: [
-                            Positioned(
-                              left: 10,
-                              child: Column(
-                                children: [
-                                  Text(
-                                    "Invoice No.",
+        child: Column(
+          children: [
+            Container(
+              color: Colors.white,
+              child: Column(
+                children: [
+                  Divider(
+                    color: Colors.grey,
+                    thickness: 0.5,
+                  ),
+                  IntrinsicHeight(
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Container(
+                            height: 40,
+                            child: Stack(
+                              children: [
+                                Positioned(
+                                  left: 10,
+                                  child: Column(
+                                    children: [
+                                      Text(
+                                        "Invoice No.",
+                                        style: TextStyle(color: Colors.grey),
+                                      ),
+                                      Text(
+                                        "23-24-01 ",
+                                        style: TextStyle(color: Colors.black),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        VerticalDivider(
+                          color: Colors.grey,
+                          thickness: 0.5,
+                        ),
+                        Expanded(
+                          child: Container(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 200),
+                                  child: Text(
+                                    "Date",
                                     style: TextStyle(color: Colors.grey),
                                   ),
-                                  Text(
-                                    "23-24-01 ",
-                                    style: TextStyle(color: Colors.black),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    VerticalDivider(
-                      color: Colors.grey,
-                      thickness: 0.5,
-                    ),
-                    Expanded(
-                      child: Container(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(right: 200),
-                              child: Text(
-                                "Date",
-                                style: TextStyle(color: Colors.grey),
-                              ),
-                            ),
-                            Row(
-                              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  datecontroller.text,
-                                  style: TextStyle(color: Colors.black),
                                 ),
-                                IconButton(
-                                    onPressed: () {
-                                      _selectDate();
-                                    },
-                                    icon: Image(
-                                      image:
-                                          AssetImage("assets/images/down.png"),
-                                      height: 20,
-                                      width: 20,
-                                    ))
+                                Row(
+                                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      datecontroller.text,
+                                      style: TextStyle(color: Colors.black),
+                                    ),
+                                    IconButton(
+                                        onPressed: () {
+                                          _selectDate();
+                                        },
+                                        icon: Image(
+                                          image:
+                                              AssetImage("assets/images/down.png"),
+                                          height: 20,
+                                          width: 20,
+                                        ))
+                                  ],
+                                )
                               ],
-                            )
-                          ],
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Divider(
-                color: Colors.grey,
-                thickness: 0.5,
-              ),
-              Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 10),
-                    child: Text(
-                      "Firm Name:",
-                      style: TextStyle(
-                        color: Colors.grey,
-                        fontSize: 15,
-                      ),
+                      ],
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 10),
-                    child: Text(
-                      "xianinfotech LLP",
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 15,
-                          fontWeight: FontWeight.w700),
-                    ),
+                  Divider(
+                    color: Colors.grey,
+                    thickness: 0.5,
                   ),
-                  Spacer(),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 10),
-                    child: DropdownButton<String>(
-                      value: selectedValue,
-                      // Current value
-                      icon: Image(
-                        image: AssetImage("assets/images/down.png"),
-                        height: 20,
-                        width: 20,
-                      ),
-                      // Dropdown icon
-                      iconSize: 24,
-                      elevation: 16,
-                      style: TextStyle(color: Colors.black),
-                      underline: SizedBox(),
-                      onChanged: (String? newValue) {
-                        setState(() {
-                          selectedValue = newValue!;
-                        });
-                      },
-                      items: <String>[
-                        ' ',
-                        'xianinfotech LLP 2',
-                        'xianinfotech LLP 3',
-                        'xianinfotech LLP 4'
-                      ].map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value), // Display text
-                        );
-                      }).toList(),
-                    ),
-                  )
-                ],
-              ),
-              Divider(
-                color: Colors.grey[200],
-                thickness: 10,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 10, left: 10),
-                child: Container(
-                  child: Column(
+                  Row(
                     children: [
                       Padding(
-                        padding:
-                            const EdgeInsets.only(top: 10, left: 10, right: 10),
-                        child: TextFormField(
-                          controller: customercontroller,
-                          decoration: InputDecoration(
-                              // hintText: "Customer",
-                              labelText: "Customer *",
-                              labelStyle: TextStyle(color: Colors.grey),
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(5))),
+                        padding: const EdgeInsets.only(left: 10),
+                        child: Text(
+                          "Firm Name:",
+                          style: TextStyle(
+                            color: Colors.grey,
+                            fontSize: 15,
+                          ),
                         ),
                       ),
-                      SizedBox(
-                        height: 20,
-                      ),
                       Padding(
-                        padding: const EdgeInsets.only(left: 10, right: 10),
-                        child: TextFormField(
-                          controller: billingrcontroller,
-                          decoration: InputDecoration(
-                              // hintText: "billing Name",
-                              labelStyle: TextStyle(color: Colors.grey),
-                              labelText: "Billing Name (optional)",
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(5))),
+                        padding: const EdgeInsets.only(left: 10),
+                        child: Text(
+                          "xianinfotech LLP",
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 15,
+                              fontWeight: FontWeight.w700),
                         ),
                       ),
-                      SizedBox(
-                        height: 20,
-                      ),
+                      Spacer(),
                       Padding(
-                        padding: const EdgeInsets.only(left: 10, right: 10),
-                        child: TextFormField(
-                          controller: phonercontroller,
-                          decoration: InputDecoration(
-                              // hintText: "Phone Number",
-                              labelStyle: TextStyle(color: Colors.grey),
-                              labelText: "Phone Number",
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(5))),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 30,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 10, right: 10),
-                        child: ElevatedButton(
-                          onPressed: () {
-                            firebasehelepr().addData(
-                                customercontroller.text,
-                                billingrcontroller.text,
-                                phonercontroller.text,
-                                " ",
-                                " ",
-                                " ");
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => additem(),
-                                ));
+                        padding: const EdgeInsets.only(right: 10),
+                        child: DropdownButton<String>(
+                          value: selectedValue,
+                          // Current value
+                          icon: Image(
+                            image: AssetImage("assets/images/down.png"),
+                            height: 20,
+                            width: 20,
+                          ),
+                          // Dropdown icon
+                          iconSize: 24,
+                          elevation: 16,
+                          style: TextStyle(color: Colors.black),
+                          underline: SizedBox(),
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              selectedValue = newValue!;
+                            });
                           },
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(
-                                CupertinoIcons.plus_circle_fill,
-                                color: Colors.blue,
-                              ),
-                              Text(
-                                "Add items",
-                                style: TextStyle(
-                                    color: Colors.blue,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                              SizedBox(
-                                width: 5,
-                              ),
-                              Text(
-                                "(Optional)",
-                                style: TextStyle(color: Colors.grey),
-                              )
-                            ],
-                          ),
-                          style: ElevatedButton.styleFrom(
-                            minimumSize: Size(double.infinity, 55),
-                            side: BorderSide(width: 1.0, color: Colors.grey),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                          ),
+                          items: <String>[
+                            ' ',
+                            'xianinfotech LLP 2',
+                            'xianinfotech LLP 3',
+                            'xianinfotech LLP 4'
+                          ].map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value), // Display text
+                            );
+                          }).toList(),
                         ),
-                      ),
-                      SizedBox(
-                        height: 20,
                       )
                     ],
                   ),
-                ),
-              )
-            ],
-          ),
+                  Divider(
+                    color: Colors.grey[200],
+                    thickness: 10,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 10, left: 10),
+                    child: Container(
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding:
+                                const EdgeInsets.only(top: 10, left: 10, right: 10),
+                            child: TextFormField(
+                              controller: customercontroller,
+                              decoration: InputDecoration(
+                                  // hintText: "Customer",
+                                  labelText: "Customer *",
+                                  labelStyle: TextStyle(color: Colors.grey),
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(5))),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 10, right: 10),
+                            child: TextFormField(
+                              controller: billingrcontroller,
+                              decoration: InputDecoration(
+                                  // hintText: "billing Name",
+                                  labelStyle: TextStyle(color: Colors.grey),
+                                  labelText: "Billing Name (optional)",
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(5))),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 10, right: 10),
+                            child: TextFormField(
+                              controller: phonercontroller,
+                              decoration: InputDecoration(
+                                  // hintText: "Phone Number",
+                                  labelStyle: TextStyle(color: Colors.grey),
+                                  labelText: "Phone Number",
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(5))),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 30,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 10, right: 10),
+                            child: ElevatedButton(
+                              onPressed: () {
+                                firebasehelepr().addData(
+                                    datecontroller.text,
+                                    customercontroller.text,
+                                    billingrcontroller.text,
+                                    phonercontroller.text,
+                                    " ",
+                                    " ",
+                                    " ");
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => additem(),
+                                    ));
+                              },
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    CupertinoIcons.plus_circle_fill,
+                                    color: Colors.blue,
+                                  ),
+                                  Text(
+                                    "Add items",
+                                    style: TextStyle(
+                                        color: Colors.blue,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                  SizedBox(
+                                    width: 5,
+                                  ),
+                                  Text(
+                                    "(Optional)",
+                                    style: TextStyle(color: Colors.grey),
+                                  )
+                                ],
+                              ),
+                              style: ElevatedButton.styleFrom(
+                                minimumSize: Size(double.infinity, 55),
+                                side: BorderSide(width: 1.0, color: Colors.grey),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5),
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 20,
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 10,),
+            Padding(
+              padding: const EdgeInsets.only(left: 20,right: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text("Total Amount : ",style: TextStyle(fontWeight: FontWeight.w700,fontSize: 15),),
+                  Text(initialamount),
+                ],
+              ),
+            )
+          ],
         ),
       ),
       bottomNavigationBar: Container(

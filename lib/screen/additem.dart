@@ -19,7 +19,7 @@ class _additemState extends State<additem> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.pink[50],
+      backgroundColor: Colors.grey[200],
       appBar: AppBar(
         leading: BackButton(
           onPressed: () {
@@ -60,6 +60,7 @@ class _additemState extends State<additem> {
                           labelStyle: TextStyle(color: Colors.grey),
                           labelText: "Item Name",
                           hintText: "eg. chocolate cake",
+                          hintStyle: TextStyle(color: Colors.grey),
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(5))),
                     ),
@@ -217,7 +218,6 @@ class _additemState extends State<additem> {
                 ),
               ),
             ),
-            // Optional: Add some space between the text fields
             Expanded(
               child: ElevatedButton(
                 onPressed: () {
@@ -225,9 +225,15 @@ class _additemState extends State<additem> {
                       " ",
                       " ",
                       " ",
+                      " ",
                       itemnamecontroller.text,
                       quantitycontroller.text,
                       ratecontroller.text);
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => saleui(),
+                      ));
                 },
                 child: Text(
                   "Save",

@@ -3,8 +3,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class firebasehelepr {
   var collection = FirebaseFirestore.instance.collection("xianinfotech LLP");
-  Future<void> addData(String customer,String billingname,String phoneno,String itemname,String quantity,String rate) async {
+  Future<void> addData(String date,String customer,String billingname,String phoneno,String itemname,String quantity,String rate) async {
     collection.add({
+      "date":date,
       "customer":customer,
       "billingname":billingname,
       "phoneno":phoneno,
